@@ -612,51 +612,44 @@
         }
 /* ===== ADD THIS RIGHT HERE ===== */
 
-/* ===== PLAYLIST LAYOUT CLEAN FIX ===== */
+/* ===== PLAYLIST LAYOUT FIX (PINK BACKGROUND VERSION) ===== */
+
+#playlistView{
+  width: min(1000px, 94vw);
+  margin: 0 auto;
+}
 
 .playlist-title{
   font-weight: 700;
   margin-bottom: 32px;
-    text-align: center;
+  text-align: center;
   padding: 0 12px;
-}
-
-/* IMPORTANT: stop modal from forcing weird width */
-#playlistView{
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
 }
 
 .playlist-row{
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   gap: clamp(20px, 4vw, 60px);
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   width: 100%;
 }
 
-/* Card look */
-.media-card{
-  border-radius: 16px;
-  overflow: hidden;
-  flex: 0 0 auto;
-}
-
-/* Bigger, responsive video */
+/* Video sizing */
 .video-card{
-  width: min(38vw, 420px);
+  height: min(62vh, 560px);
+  width: auto;
   aspect-ratio: 9 / 16;
 }
 
-/* Responsive QR */
+/* QR sizing */
 .qr-card{
-  width: min(28vw, 340px);
+  height: min(38vh, 360px);
+  width: auto;
   aspect-ratio: 1 / 1;
 }
 
-/* Remove black bars */
+/* Make media fill cards */
 .video-card video{
   width: 100%;
   height: 100%;
@@ -671,19 +664,10 @@
   display: block;
 }
 
-/* Phone layout */
-@media (max-width: 768px){
-  .playlist-row{
-    gap: 16px;
-  }
-
-  .video-card{
-    width: 46vw;
-  }
-
-  .qr-card{
-    width: 42vw;
-  }
+/* Smaller screens */
+@media (max-height: 700px){
+  .video-card{ height: min(52vh, 480px); }
+  .qr-card{ height: min(32vh, 300px); }
 }
 
 
