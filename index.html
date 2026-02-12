@@ -635,18 +635,19 @@
 
 /* Smaller cards so BOTH fit */
 .video-card{
-    width: 240px;
-    height: 240px;      /* square frame */
+    width: 320px;              /* adjust bigger if you want */
+    aspect-ratio: 9 / 16;      /* TRUE reels ratio */
 }
+        
 .qr-card{
-    width: 240px;
+    width: 300px;
 }
 
 /* Crop video to remove black bars */
 .video-card video{
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover;         /* fills perfectly */
     display: block;
 }
 
@@ -658,25 +659,26 @@
 
 /* On small screens, stack them */
 @media (max-width: 640px){
-    .playlist-row{
-        flex-wrap: nowrap;     /* keep side-by-side */
-        gap: 12px;
-    }
+  .playlist-row{
+    flex-wrap: nowrap;
+    gap: 12px;
+  }
 
-    /* make both fit the phone width */
-    .video-card, .qr-card{
-        width: 44vw;
-    }
-    .video-card{
-        height: 44vw;          /* keep video box square */
-    }
+  .video-card{
+    width: 44vw;
+    aspect-ratio: 9 / 16;   /* KEEP vertical */
+  }
 
-    .video-card video{
-        width: 100%;
-        height: 100%;
-        object-fit: cover;     /* removes black bars */
-        display: block;
-    }
+  .qr-card{
+    width: 44vw;
+  }
+
+  .video-card video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 }
 
 /* ===== END ADD ===== */
