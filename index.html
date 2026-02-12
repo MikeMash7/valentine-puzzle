@@ -562,9 +562,18 @@
 
         /* Success view: no modal card, content on pink background only */
         .container.container--success {
+            max-width: none;   /* remove the 650px cap */
+            width: 100%;
             background: transparent;
             box-shadow: none;
             padding: 24px;
+        }
+
+        .container.container--playlist{
+          background: transparent;
+          box-shadow: none;
+          max-width: none;
+          width: 100%;
         }
 
         /* Success: Yay + gif + Reset */
@@ -631,8 +640,11 @@
   justify-content: center;
   align-items: center;
   gap: clamp(20px, 4vw, 60px);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   width: 100%;
+}
+        @media (max-width: 768px){
+  .playlist-row{ flex-wrap: wrap; }  /* ✅ stack on phones/tablets */
 }
 
 /* Video sizing */
@@ -648,6 +660,7 @@
   width: auto;
   aspect-ratio: 1 / 1;
 }
+ .video-card, .qr-card { max-width: 45vw; }
 
 /* Make media fill cards */
 .video-card video{
@@ -891,6 +904,7 @@
         });
 
         document.getElementById('nextBtn').addEventListener('click', () => {
+            container.classList.add('container--playlist');
             successView.classList.remove('visible');
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => playlistView.classList.add('visible'));
