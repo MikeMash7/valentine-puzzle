@@ -623,55 +623,49 @@
         }
 /* ===== ADD THIS RIGHT HERE ===== */
 
-/* ===== PLAYLIST LAYOUT FIX (PINK BACKGROUND VERSION) ===== */
+/* ===== PLAYLIST: BIGGER ON DESKTOP ===== */
 
 #playlistView{
-  width: min(1000px, 94vw);
+  width: min(1400px, 98vw);  /* was 1000px, 94vw */
   margin: 0 auto;
-    padding: 12px 0;
 }
 
 .playlist-title{
-  font-weight: 700;
-  margin-bottom: 32px;
+  font-weight: 800;
+  margin-bottom: 36px;
   text-align: center;
   padding: 0 12px;
+  font-size: clamp(22px, 2.2vw, 40px); /* makes the title bigger too */
 }
 
 .playlist-row{
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: clamp(20px, 4vw, 60px);
-  flex-wrap: nowrap;
+  gap: clamp(28px, 5vw, 90px); /* bigger gap */
+  flex-wrap: nowrap;           /* keep side-by-side on desktop */
   width: 100%;
 }
-        @media (max-width: 768px){
-  .playlist-row{ flex-wrap: wrap; }  /* ✅ stack on phones/tablets */
-}
 
-/* Video sizing */
+/* BIG cards on desktop */
 .video-card{
-  height: min(75vh, 700px);
-  width: auto;
+  height: min(78vh, 820px);   /* was 62vh, 560px */
   aspect-ratio: 9 / 16;
-}
-
-/* QR sizing */
-.qr-card{
-  height: min(50vh, 500px);
   width: auto;
+}
+
+.qr-card{
+  height: min(60vh, 640px);   /* was 38vh, 360px */
   aspect-ratio: 1 / 1;
-}
-/* Desktop (Mac): no cap — let them be big */
-.video-card, .qr-card { max-width: none; }
-
-/* Only cap on smaller screens if needed */
-@media (max-width: 900px){
-  .video-card, .qr-card { max-width: 92vw; }
+  width: auto;
 }
 
-/* Make media fill cards */
+/* Let them be big on desktop */
+.video-card, .qr-card{
+  max-width: none;
+}
+
+/* Fill the cards */
 .video-card video{
   width: 100%;
   height: 100%;
@@ -686,10 +680,12 @@
   display: block;
 }
 
-/* Smaller screens */
-@media (max-height: 700px){
-  .video-card{ height: min(52vh, 480px); }
-  .qr-card{ height: min(32vh, 300px); }
+/* Phones/tablets: stack + keep it sane */
+@media (max-width: 900px){
+  .playlist-row{ flex-wrap: wrap; }
+  .video-card{ height: min(60vh, 520px); }
+  .qr-card{ height: min(45vh, 420px); }
+  .video-card, .qr-card{ max-width: 92vw; }
 }
 
 
