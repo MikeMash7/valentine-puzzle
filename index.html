@@ -611,29 +611,72 @@
         }
 /* ===== ADD THIS RIGHT HERE ===== */
 
-/* Playlist layout: video + QR side-by-side */
-.playlist-row {
+/* ===== PLAYLIST LAYOUT (side-by-side) ===== */
+.playlist-title{
+    font-weight: 700;           /* bold like success title */
+}
+
+.playlist-row{
     display: flex;
-    gap: 16px;
-    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 32px;          /* smaller gap so it fits */
+    flex-wrap: nowrap;  /* stay side-by-side */
+    width: 100%;
 }
 
-.playlist-row .success-gif-wrap {
-    margin: 0;
-    max-width: 340px;
+/* Shared card look */
+.media-card{
+    border-radius: 12px;
+    overflow: hidden;
+    background: transparent;
+    flex: 0 0 auto;     /* don’t let flex do weird sizing */
 }
 
-.playlist-qr {
-    max-width: 260px;
-    text-align: center;
+/* Smaller cards so BOTH fit */
+.video-card{
+    width: 240px;
+    height: 240px;      /* square frame */
+}
+.qr-card{
+    width: 240px;
 }
 
-.success-gif-wrap video {
+/* Crop video to remove black bars */
+.video-card video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
+}
+
+.qr-card img{
     width: 100%;
     height: auto;
+    display: block;
+}
+
+/* On small screens, stack them */
+@media (max-width: 640px){
+    .playlist-row{
+        flex-wrap: nowrap;     /* keep side-by-side */
+        gap: 12px;
+    }
+
+    /* make both fit the phone width */
+    .video-card, .qr-card{
+        width: 44vw;
+    }
+    .video-card{
+        height: 44vw;          /* keep video box square */
+    }
+
+    .video-card video{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;     /* removes black bars */
+        display: block;
+    }
 }
 
 /* ===== END ADD ===== */
@@ -683,25 +726,23 @@
                 </div>
                 <button type="button" class="reset-btn" id="nextBtn">Click here</button>
             </div>
-           <!-- VIEW: Playlist (NEW) -->
+            <!-- VIEW: Playlist (NEW) -->
             <div id="playlistView" class="modal-view">
-                <p class="modal-title">One more thing…</p>
+                <p class="modal-title playlist-title">
+                    Scan this QR code to see this playlist I made you
+                </p>
             
                 <div class="playlist-row">
-                    <div class="success-gif-wrap">
+                    <!-- Video -->
+                    <div class="media-card video-card">
                         <video autoplay loop muted playsinline>
                             <source src="images/jvideo.mp4" type="video/mp4">
                         </video>
                     </div>
             
-                    <div class="playlist-qr">
-                        <p class="valentine-question" style="margin: 0 0 12px 0;">
-                            Scan this QR code to see this playlist I made you
-                        </p>
-            
-                        <div class="success-gif-wrap" style="max-width: 260px;">
-                            <img src="images/qr.png" alt="Playlist QR code" />
-                        </div>
+                    <!-- QR -->
+                    <div class="media-card qr-card">
+                        <img src="images/qr.png" alt="Playlist QR code" />
                     </div>
                 </div>
             
