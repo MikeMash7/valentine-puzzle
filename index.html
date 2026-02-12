@@ -587,6 +587,13 @@
             height: auto;
         }
 
+        .success-gif-wrap video {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+
         .reset-btn {
             background: none;
             border: none;
@@ -602,7 +609,34 @@
         .reset-btn:hover {
             color: #111;
         }
+/* ===== ADD THIS RIGHT HERE ===== */
 
+/* Playlist layout: video + QR side-by-side */
+.playlist-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.playlist-row .success-gif-wrap {
+    margin: 0;
+    max-width: 340px;
+}
+
+.playlist-qr {
+    max-width: 260px;
+    text-align: center;
+}
+
+.success-gif-wrap video {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* ===== END ADD ===== */
     </style>
 </head>
 <body>
@@ -625,7 +659,7 @@
         <div class="modal-inner">
             <!-- VIEW: Puzzle (playing + completed state in same view) -->
             <div id="puzzleView" class="modal-view">
-                <h1 class="modal-title">Dear JULIE🌹...</h1>
+                <h1 class="modal-title">Dear Julie🌹...</h1>
                 <div class="puzzle-container" id="puzzleContainer">
                     <div class="puzzle-grid-wrap" id="puzzleGridWrap">
                         <div class="puzzle-grid" id="puzzleGrid"></div>
@@ -635,7 +669,7 @@
                     </div>
                 </div>
                 <div class="puzzle-reveal-text" id="puzzleRevealText">
-                    <p class="complete-line">...you complete me.</p>
+                    <p class="complete-line">...#Sorry 4 da wait baby.</p>
                     <p class="valentine-question">Will you be my Valentine?</p>
                     <button type="button" class="yes-only-btn" id="yesBtn">Yes</button>
                 </div>
@@ -643,13 +677,37 @@
 
             <!-- VIEW: Success -->
             <div id="successView" class="modal-view">
-                <p class="modal-title">Yay, I can't wait!</p>
+                <p class="modal-title">🫦Yessir! Click the button at the bottom...</p>
                 <div class="success-gif-wrap">
                     <img src="giphy.gif" alt="" />
                 </div>
+                <button type="button" class="reset-btn" id="nextBtn">Click here</button>
+            </div>
+           <!-- VIEW: Playlist (NEW) -->
+            <div id="playlistView" class="modal-view">
+                <p class="modal-title">One more thing…</p>
+            
+                <div class="playlist-row">
+                    <div class="success-gif-wrap">
+                        <video autoplay loop muted playsinline>
+                            <source src="images/jvideo.mp4" type="video/mp4">
+                        </video>
+                    </div>
+            
+                    <div class="playlist-qr">
+                        <p class="valentine-question" style="margin: 0 0 12px 0;">
+                            Scan this QR code to see this playlist I made you
+                        </p>
+            
+                        <div class="success-gif-wrap" style="max-width: 260px;">
+                            <img src="images/qr.png" alt="Playlist QR code" />
+                        </div>
+                    </div>
+                </div>
+            
                 <button type="button" class="reset-btn" id="resetBtn">Reset</button>
             </div>
-        </div>
+       </div>
     </div>
 
     <script>
@@ -659,6 +717,7 @@
         const puzzleGrid = document.getElementById('puzzleGrid');
         const puzzleView = document.getElementById('puzzleView');
         const successView = document.getElementById('successView');
+        const playlistView = document.getElementById('playlistView');
         
         envelope.addEventListener('click', () => {
             envelope.style.pointerEvents = 'none';
@@ -795,6 +854,13 @@
             puzzleView.classList.remove('visible');
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => successView.classList.add('visible'));
+            });
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            successView.classList.remove('visible');
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => playlistView.classList.add('visible'));
             });
         });
         
