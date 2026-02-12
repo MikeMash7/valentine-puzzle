@@ -574,6 +574,8 @@
           box-shadow: none;
           max-width: none;
           width: 100%;
+          transform: none !important;
+          max-height: none;
         }
 
         /* Success: Yay + gif + Reset */
@@ -626,6 +628,7 @@
 #playlistView{
   width: min(1000px, 94vw);
   margin: 0 auto;
+    padding: 12px 0;
 }
 
 .playlist-title{
@@ -660,7 +663,13 @@
   width: auto;
   aspect-ratio: 1 / 1;
 }
- .video-card, .qr-card { max-width: 45vw; }
+/* Desktop (Mac): no cap — let them be big */
+.video-card, .qr-card { max-width: none; }
+
+/* Only cap on smaller screens if needed */
+@media (max-width: 900px){
+  .video-card, .qr-card { max-width: 92vw; }
+}
 
 /* Make media fill cards */
 .video-card video{
