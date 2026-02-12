@@ -20,6 +20,7 @@
             align-items: center;
             background: #FFDAE9;
             overflow: auto;
+            overflow-x: hidden;
             padding: 24px;
         }
 
@@ -65,12 +66,12 @@
             justify-content: center;
             align-items: center;
             min-height: 0;
-            width: fit-content;
+            width: 100%;
             max-width: 100%;
         }
 
         .modal-view {
-            width: fit-content;
+            width: 100%;
             max-width: 100%;
             opacity: 0;
             transition: opacity 0.25s ease;
@@ -611,75 +612,83 @@
         }
 /* ===== ADD THIS RIGHT HERE ===== */
 
-/* ===== PLAYLIST LAYOUT (side-by-side) ===== */
+/* ===== PLAYLIST LAYOUT CLEAN FIX ===== */
+
 .playlist-title{
-    font-weight: 700;           /* bold like success title */
+  font-weight: 700;
+  margin-bottom: 32px;
+    text-align: center;
+  padding: 0 12px;
+}
+
+/* IMPORTANT: stop modal from forcing weird width */
+#playlistView{
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .playlist-row{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 32px;          /* smaller gap so it fits */
-    flex-wrap: nowrap;  /* stay side-by-side */
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(20px, 4vw, 60px);
+  flex-wrap: nowrap;
+  width: 100%;
 }
 
-/* Shared card look */
+/* Card look */
 .media-card{
-    border-radius: 12px;
-    overflow: hidden;
-    background: transparent;
-    flex: 0 0 auto;     /* don’t let flex do weird sizing */
+  border-radius: 16px;
+  overflow: hidden;
+  flex: 0 0 auto;
 }
 
-/* Smaller cards so BOTH fit */
+/* Bigger, responsive video */
 .video-card{
-    width: 320px;              /* adjust bigger if you want */
-    aspect-ratio: 9 / 16;      /* TRUE reels ratio */
-}
-        
-.qr-card{
-    width: 300px;
+  width: min(38vw, 420px);
+  aspect-ratio: 9 / 16;
 }
 
-/* Crop video to remove black bars */
+/* Responsive QR */
+.qr-card{
+  width: min(28vw, 340px);
+  aspect-ratio: 1 / 1;
+}
+
+/* Remove black bars */
 .video-card video{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;         /* fills perfectly */
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .qr-card img{
-    width: 100%;
-    height: auto;
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
-/* On small screens, stack them */
-@media (max-width: 640px){
+/* Phone layout */
+@media (max-width: 768px){
   .playlist-row{
-    flex-wrap: nowrap;
-    gap: 12px;
+    gap: 16px;
   }
 
   .video-card{
-    width: 44vw;
-    aspect-ratio: 9 / 16;   /* KEEP vertical */
+    width: 46vw;
   }
 
   .qr-card{
-    width: 44vw;
-  }
-
-  .video-card video{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+    width: 42vw;
   }
 }
+
 
 /* ===== END ADD ===== */
     </style>
