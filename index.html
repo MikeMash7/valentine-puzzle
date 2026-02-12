@@ -1,5 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">/* ===== PLAYLIST LAYOUT FIX (PINK BACKGROUND VERSION) ===== */
+
+#playlistView{
+  width: min(1000px, 94vw);
+  margin: 0 auto;
+}
+
+.playlist-title{
+  font-weight: 700;
+  margin-bottom: 32px;
+  text-align: center;
+  padding: 0 12px;
+}
+
+.playlist-row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(20px, 4vw, 60px);
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* Video sizing */
+.video-card{
+  height: min(62vh, 560px);
+  width: auto;
+  aspect-ratio: 9 / 16;
+}
+
+/* QR sizing */
+.qr-card{
+  height: min(38vh, 360px);
+  width: auto;
+  aspect-ratio: 1 / 1;
+}
+
+/* Make media fill cards */
+.video-card video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.qr-card img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Smaller screens */
+@media (max-height: 700px){
+  .video-card{ height: min(52vh, 480px); }
+  .qr-card{ height: min(32vh, 300px); }
+}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -721,7 +777,7 @@
             <!-- VIEW: Playlist (NEW) -->
             <div id="playlistView" class="modal-view">
                 <p class="modal-title playlist-title">
-                    Scan this QR code to see this playlist I made you
+                    Scan this QR code to see this playlist I made you❤️🎵
                 </p>
             
                 <div class="playlist-row">
